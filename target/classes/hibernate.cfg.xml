@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        
+<hibernate-configuration>
+	<session-factory>
+		<!-- CHAINE DE CONNEXION  -->
+		<!--  Driver de connexion à notre base de donnée -->
+		<property name="connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>	
+		
+		<!--  URL de connexion à notre BDD -->
+		<property name="connection.url">
+			jdbc:mysql://localhost:3306/employeeCompany
+		</property>
+		
+		<!--  identifiant de connexion -->
+		<property name="connection.username">root</property>
+		<property name="connection.password">root</property>
+		
+		<!-- on log les requetes sql !! Attention on l'enlève pour la mise en production-->
+		<property name="show_sql">true</property>
+		
+		
+		<!-- ON map les entités à la BDD -->
+		<mapping class="entities.Employe" />
+		
+		
+	</session-factory>
+</hibernate-configuration>
