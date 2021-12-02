@@ -80,7 +80,7 @@ public class EmployeManager {
 		session.beginTransaction();
 		session.save(emp);
 		session.save(emp2);
-		//Je l'ajoute à la liste
+		//Solution avec une liste en interne je rajoute à la liste
 		listEmployes.add(emp);
 		listEmployes.add(emp2);
 		session.getTransaction().commit();
@@ -108,6 +108,8 @@ public class EmployeManager {
 	 */
 	protected void update(long id, Employe newEmp) {
 		Employe emp = this.read(id);
+
+		listEmployes.remove(emp);
 		
 		if(newEmp.getNom()!=null)
 			emp.setNom(newEmp.getNom());
@@ -127,6 +129,7 @@ public class EmployeManager {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.update(emp);
+		listEmployes.add(emp);
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -139,6 +142,7 @@ public class EmployeManager {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.delete(emp);
+		listEmployes.remove(emp);// solution avec une liste en interne
 		session.getTransaction().commit();
 		session.close();
 	}
@@ -147,7 +151,16 @@ public class EmployeManager {
 	 * voir toute la table d'employee / tous les enregistrements
 	 */
 	protected void readAll() {
+		//solution avec des querys
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		List<Employe> listEmp = session.createQuery("select e from Employe e", Employe.class).getResultList();
+		for (Employe employe : listEmp) {
+			System.out.println(employe.toString());
+		}
 		
+		
+		//solution avec des listes en interne
 		for (Employe employe : listEmployes) {
 			System.out.println(employe.toString());
 		}
