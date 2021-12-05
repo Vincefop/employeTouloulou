@@ -47,6 +47,11 @@ public class Secteur {
 	public void setEmployes(Set<Employe> employes) {
 		this.employes = employes;
 	}
+	@Override
+	public String toString() {
+		return "Secteur [secteurId=" + secteurId + ", nom=" + nom + ", localisation=" + localisation + ", employes="
+				+ employes + "]";
+	}
 	
 	
 }

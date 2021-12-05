@@ -16,6 +16,7 @@ public class Filiale {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long filialeId;
 	private String nom;
+	private int nbreEmp;
 	@ManyToOne
 	@JoinColumn(name = "entrepriseId")
 	private Entreprise entreprise;
@@ -33,11 +34,22 @@ public class Filiale {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+	public int getNbreEmp() {
+		return nbreEmp;
+	}
+	public void setNbreEmp(int nbreEmp) {
+		this.nbreEmp = nbreEmp;
+	}
 	public Entreprise getEntreprise() {
 		return entreprise;
 	}
 	public void setEntreprise(Entreprise entreprise) {
 		this.entreprise = entreprise;
+	}
+	@Override
+	public String toString() {
+		return "Filiale [filialeId=" + filialeId + ", nom=" + nom + ", nombreEmployes=" + nbreEmp
+				+ ", entreprise=" + entreprise.getNom() + "]";
 	}
 	
 	

@@ -94,7 +94,7 @@ public class Employe {
 	public String toString() {
 		return "Employe [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", courriel=" + courriel + ", age=" + age
 				+ ", fonction=" + fonction + ", telephone=" + telephone + ", adresse=" + adresse + ", secteur="
-				+ secteur + "]";
+				+ secteur.getNom() + "]";
 	}
 	
 	

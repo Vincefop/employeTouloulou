@@ -39,6 +39,10 @@ public class Entreprise {
 	public void setFiliales(Set<Filiale> filiales) {
 		this.filiales = filiales;
 	}
+	@Override
+	public String toString() {
+		return "Entreprise [entrepriseId=" + entrepriseId + ", nom=" + nom + ", filiales=" + filiales + "]";
+	}
 	
 	
 }

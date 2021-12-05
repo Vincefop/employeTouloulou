@@ -40,6 +40,7 @@ public class EmployeManager {
 		}catch(Exception e) {
 			StandardServiceRegistryBuilder.destroy(registry);
 		}
+		
 	}
 	
 	/**
@@ -67,36 +68,36 @@ public class EmployeManager {
 		Secteur secteur1 = new Secteur();
 		secteur1.setNom("Finances");
 		secteur1.setLocalisation("Paris");
+		emp.setSecteur(secteur1);
 		Set<Employe> employes = new HashSet<Employe>();
 		employes.add(emp);
 		secteur1.setEmployes(employes);
-		emp.setSecteur(secteur1);
+		
 		
 		
 		Employe emp2 = new Employe();
 		emp2.setNom("Machin");
 		emp2.setPrenom("Nana");
 		emp2.setCourriel("machin.nana@employe.fr");
-		emp2.setAge(42);
-		emp2.setFonction("cadre");
+		emp2.setAge(39);
+		emp2.setFonction("employe");
 		emp2.setTelephone("0668997327");
 		emp2.setAdresse("123 rue lalaland");
 		
 		Secteur secteur2 = new Secteur();
 		secteur2.setNom("Developpement");
 		secteur2.setLocalisation("Lille");
-		
 		emp2.setSecteur(secteur2);
 		
 		
 		Employe emp3 = new Employe();
-		emp3.setNom("Machin");
-		emp3.setPrenom("Nana");
-		emp3.setCourriel("machin.nana@employe.fr");
+		emp3.setNom("Sylvie");
+		emp3.setPrenom("Loute");
+		emp3.setCourriel("nouvelle.nana@employe.fr");
 		emp3.setAge(42);
-		emp3.setFonction("cadre");
+		emp3.setFonction("employe");
 		emp3.setTelephone("0668997327");
-		emp3.setAdresse("123 rue lalaland");
+		emp3.setAdresse("34 bd Louis");
 		emp3.setSecteur(secteur2);
 		
 		Set<Employe> employes2 = new HashSet<Employe>();
@@ -148,14 +149,7 @@ public class EmployeManager {
 			emp.setTelephone(newEmp.getTelephone());
 		if(newEmp.getAdresse()!=null)
 			emp.setAdresse(newEmp.getAdresse());
-		if(newEmp.getSecteur()!= null) {
-			Secteur newSec = newEmp.getSecteur();
-			Set<Employe> employes = newSec.getEmployes();
-			employes.add(emp);
-			newSec.setEmployes(employes);
-			emp.setSecteur(newSec);
-		}
-		
+	
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.update(emp);
@@ -168,6 +162,7 @@ public class EmployeManager {
 	 * @param emp
 	 */
 	protected void delete(Employe emp) {
+	
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		session.delete(emp);
@@ -196,23 +191,23 @@ public class EmployeManager {
 	public static void main(String[] args) {
 		EmployeManager manager = new EmployeManager();
 		manager.setup();
+		
+		
 		//CREATE
 //		manager.create();
 		
+		//READ
+//		manager.read(1L);
+		
+		
 		//UPDATE
-		Employe emp = new Employe();
-//		Secteur secteur3 = new Secteur();
-//		secteur3.setNom("Ressources");
-//		secteur3.setLocalisation("Tourcoing");
-//		Set<Employe> employes = new HashSet<Employe>();
-//		secteur3.setEmployes(employes);
-//		emp.setSecteur(secteur3);
-		emp.setAge(80);
-		manager.update(1, emp);
+//		Employe emp = new Employe();
+//		emp.setAge(22);
+//		manager.update(2, emp);
 		
 		//DELETE
-//		Employe emp = manager.read(1);
-//		manager.delete(emp);
+		Employe emp = manager.read(2);
+		manager.delete(emp);
 		
 		//readAll
 //		manager.readAll();
@@ -220,30 +215,3 @@ public class EmployeManager {
 		manager.exit();
 	}
 }
-
-	
-//Objectif :
-//
-//	 
-//
-//N1 : Créer un systeme pour enregistrer, editer et supprimer un employé puis voir un  employé et voir la liste de tous les employés
-//de l'entreprise Touloulou.
-//
-// 
-//
-//Employé :
-//Nom
-//Prénom
-//Courriel
-//Age
-//Fonction
-//Telephone
-//Addresse postal
-//
-// 
-//
-//N2 : Réfléchir en archi N'3
-//
-//1 controller
-//1 service
-//1 repo
