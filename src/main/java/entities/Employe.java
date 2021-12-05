@@ -17,6 +17,9 @@ public class Employe {
 	private String fonction;
 	private String telephone;
 	private String adresse;
+	@ManyToOne
+	@JoinColumn(name = "secteurId")
+	private Secteur secteur;
 	public Employe() {
 	}
 	public Employe(long id, String nom, String prenom, String courriel, int age, String fonction, String telephone,
@@ -30,6 +33,14 @@ public class Employe {
 		this.fonction = fonction;
 		this.telephone = telephone;
 		this.adresse = adresse;
+	}
+	
+	
+	public Secteur getSecteur() {
+		return secteur;
+	}
+	public void setSecteur(Secteur secteur) {
+		this.secteur = secteur;
 	}
 	public long getId() {
 		return id;
@@ -82,8 +93,10 @@ public class Employe {
 	@Override
 	public String toString() {
 		return "Employe [id=" + id + ", nom=" + nom + ", prenom=" + prenom + ", courriel=" + courriel + ", age=" + age
-				+ ", fonction=" + fonction + ", telephone=" + telephone + ", adresse=" + adresse + "]";
+				+ ", fonction=" + fonction + ", telephone=" + telephone + ", adresse=" + adresse + ", secteur="
+				+ secteur + "]";
 	}
+	
 	
 	
 	

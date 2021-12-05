@@ -14,7 +14,7 @@
 		
 		<!--  URL de connexion à notre BDD -->
 		<property name="connection.url">
-			jdbc:mysql://localhost:3306/employeeCompany
+			jdbc:mysql://localhost:3306/employeecompany
 		</property>
 		
 		<!--  identifiant de connexion -->
@@ -27,7 +27,9 @@
 		
 		<!-- ON map les entités à la BDD -->
 		<mapping class="entities.Employe" />
-		
+		<mapping class="entities.Secteur" />
+		<mapping class="entities.Entreprise" />
+		<mapping class="entities.Filiale" />
 		
 	</session-factory>
 </hibernate-configuration>
