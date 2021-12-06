@@ -1,10 +1,16 @@
 package entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -20,7 +26,18 @@ public class Filiale {
 	@ManyToOne
 	@JoinColumn(name = "entrepriseId")
 	private Entreprise entreprise;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(
+			name="filiales_secteurs",
+			joinColumns = @JoinColumn(name= "filiale_id"),
+			inverseJoinColumns = @JoinColumn (name="secteur_id")
+			)
+	private Set<Secteur> secteurs = new HashSet<Secteur>();
 	
+
+	public void addSecteur( Secteur secteur) {
+		this.secteurs.add(secteur);
+	}
 	
 	public long getFilialeId() {
 		return filialeId;
@@ -45,6 +62,13 @@ public class Filiale {
 	}
 	public void setEntreprise(Entreprise entreprise) {
 		this.entreprise = entreprise;
+	}
+	
+	public Set<Secteur> getSecteurs() {
+		return secteurs;
+	}
+	public void setSecteurs(Set<Secteur> secteurs) {
+		this.secteurs = secteurs;
 	}
 	@Override
 	public String toString() {
