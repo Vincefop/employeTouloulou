@@ -40,7 +40,22 @@ public class Employe {
 		return secteur;
 	}
 	public void setSecteur(Secteur secteur) {
-		this.secteur = secteur;
+		//je vérifie que ce n'est pas la première fois qu'on attribue un secteur à cet employé
+		if(this.secteur!=null) {
+			//A chaque fois que je change un employé de secteur
+			//je l'enlève du compteur d'employé de la filiale ou les filiales où il était compté
+			for (Filiale fil : this.secteur.getFiliales()) {
+				if(this.secteur!=null) {//Je vérifie qu'il avait bien un secteur affilié 
+					fil.setNbreEmp(fil.getNbreEmp()-1);//et j'enlève 1 du compteur
+				}
+			}
+			//ensuite je le change de secteur. 
+			this.secteur = secteur;
+			//Et je rajoute une personne à chaque filiale connectée à ce secteur
+			for (Filiale fil : this.secteur.getFiliales()) {
+				fil.setNbreEmp(fil.getNbreEmp()+1);
+			}
+		}
 	}
 	public long getId() {
 		return id;

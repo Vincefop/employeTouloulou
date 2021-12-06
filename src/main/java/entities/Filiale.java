@@ -34,9 +34,11 @@ public class Filiale {
 			)
 	private Set<Secteur> secteurs = new HashSet<Secteur>();
 	
-
+	//A chaque fois que je rajoute un secteur dans une filiale, 
+	//je rajoute le nbre d'employés de ce secteur à mon compteur d'employés
 	public void addSecteur( Secteur secteur) {
 		this.secteurs.add(secteur);
+		this.nbreEmp += secteur.getEmployes().size();
 	}
 	
 	public long getFilialeId() {
